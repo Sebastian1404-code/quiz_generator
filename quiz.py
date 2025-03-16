@@ -35,7 +35,6 @@ def extract_text_from_pdf(pdf_file):
         text += page.extract_text() + "\n"
     return text
 
-# Function to generate multiple-choice quiz from PDF content
 def generate_quiz_from_pdf(pdf_file):
     text = extract_text_from_pdf(pdf_file)
 
@@ -88,7 +87,7 @@ def show_question(index):
         current_index = index
         question = quiz_questions[index]["question"]
         options = quiz_questions[index]["options"]
-        return question, gr.update(choices=options), ""  # Reset feedback
+        return question, gr.update(choices=options), "" 
     return "No questions available", [], ""
 
 
@@ -109,12 +108,11 @@ def check_answer(user_answer):
     else:
         return f"❌ Incorrect. The correct answer is: {correct_answer}"
 
-# Function to process PDF and initialize quiz
 def process_pdf(pdf_file):
     global quiz_questions, current_index
-    quiz_questions = generate_quiz_from_pdf(pdf_file)  # Assume this function is defined
+    quiz_questions = generate_quiz_from_pdf(pdf_file)  
     if isinstance(quiz_questions, str) and quiz_questions.startswith("Error"):
-        return quiz_questions, gr.update(choices=[]), ""  # Return error message if quiz generation fails
+        return quiz_questions, gr.update(choices=[]), "" 
     current_index = 0
     return show_question(0)
 
